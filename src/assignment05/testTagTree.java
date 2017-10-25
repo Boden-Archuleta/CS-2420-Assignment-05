@@ -21,7 +21,7 @@ public class testTagTree {
 
 	@Test
 	public void testParse() {
-		Scanner ss = new Scanner("<alpha blue>");
+		Scanner ss = new Scanner("<a blue> <b green> </b> <c blue> </c> <d yellow> </d> </a>");
 		TagTree tree = new TagTree(ss);
 	}
 

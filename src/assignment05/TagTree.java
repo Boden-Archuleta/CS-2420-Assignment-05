@@ -1,7 +1,9 @@
 package assignment05;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Scanner;
+import java.util.Set;
 
 public class TagTree {
 	
@@ -10,26 +12,47 @@ public class TagTree {
 	private static class Node{
 		String data;
 		String id;
-		ArrayList<Node> children;
+		Set<Node> children;
 		Node(String i, String d){
 			id = i;
 			data = d;
+			children = new HashSet<Node>();
 		}
 	}
 
 	TagTree(Scanner ss){
-		root = new Node(parse(ss.next()), parse(ss.next()));
+		root = parseNode(ss, ss.next());
+		scan(root, ss);
 	}
 	
-	private String parse(String raw){
-		if (raw.charAt(raw.length() - 1) != '>'){
-			return raw.substring(1, raw.length());
+	private void scan(Node current, Scanner ss){
+		while (ss.hasNext()){
+			String next = ss.next();
+			
+			while(!isEndTag(next)){
+				Node child = parseNode(ss, next);
+				next = ss.next();
+				if (!isEndTag(next)){
+					scan(child, ss);
+				}
+				current.children.add(child);
+			}
 		}
-		else if (raw.charAt(0) != '<'){
-			return raw.substring(0, raw.length() - 1);
+	}
+	
+	private Node parseNode(Scanner ss, String raw){
+		String i = raw.substring(1, raw.length());
+		raw = ss.next();
+		String d = raw.substring(0, raw.length() - 1);
+		return new Node(i, d);
+	}
+	
+	private boolean isEndTag(String input){
+		if (input.charAt(1) == '/') {
+			return true;
 		}
-		else {
-			return raw.substring(2, raw.length() - 1);
+		else{
+			return false;
 		}
 	}
 	
@@ -64,11 +87,6 @@ public class TagTree {
 	}
 	
 	public boolean isFullBinaryTree(){
-		
-		return true;
-	}
-	
-	public boolean isCompleteBinaryTree(){
 		
 		return true;
 	}
