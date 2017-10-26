@@ -1,1 +1,10 @@
-<alpha blue> </alpha>
+<a blue>
+	<b red>
+	</b>
+	<c green>
+		<d yellow>
+		</d>
+	</c>
+	<e orange>
+	</e>
+</a>
