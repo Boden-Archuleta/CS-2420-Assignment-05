@@ -115,7 +115,7 @@ public class testTagTree {
 		Scanner ss = new Scanner(f);
 		TagTree tree = new TagTree(ss);
 		
-		assertEquals(1, tree.findDepth("red"));
+		assertEquals(1, tree.findDepth("yellow"));
 		
 		ss.close();
 	}

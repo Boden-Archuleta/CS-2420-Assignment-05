@@ -176,11 +176,28 @@ public class TagTree {
 	}
 	
 	public int findDepth(String word){
-		return findDepth(word, root, 0, -1);
+		return findDepth(word, root, 0);
 	}
 	
-	private int findDepth(String word, Node current, int level, int val){
-		return 0;
+	private int findDepth(String word, Node current, int level){
+		if (!current.data.equals(word) && current.children.size() == 0){
+			return -1;
+		}
+		
+		if (current.data.equals(word)){
+			return level;
+		}
+		
+		level++;
+		int temp = level;
+		for (Node n : current.children){
+			level = findDepth(word, n, temp);
+			if (level > -1){
+				break;
+			}
+		}
+		
+		return level;
 	}
 	
 	
